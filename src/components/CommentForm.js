@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 import './CommentForm.css';
 import { Input, Form, TextArea, Button } from 'semantic-ui-react';
 
-const initialState = {
-  name: '',
-  comment: ''
-};
-
 class CommentForm extends Component {
   constructor(props){
     super(props);
-    this.state = initialState;
+    const { name = '', comment = '' } = this.props;
+    this.state = { name, comment };
   }
 
     handleChange = (event) => {
@@ -24,13 +20,14 @@ class CommentForm extends Component {
       const { name, comment } = this.state;
       if(name && comment){
         handleComment(name, comment);
-        this.setState(initialState);
+        this.setState({ name: '', comment: '' });
       }
       event.preventDefault();
     };
 
     render() {
       const { name, comment } = this.state;
+      const { editing } = this.props;
       return (
         <div className='commentForm'>
           <Form onSubmit={this.handleSubmit}>
@@ -41,7 +38,7 @@ class CommentForm extends Component {
               <TextArea name='comment' autoHeight
               placeholder='Your comment' onChange={this.handleChange} value={comment} />
             </Form.Field>
-            <Button type='submit' primary>Add</Button>
+            <Button type='submit' primary>{editing ? 'Save' : 'Add'}</Button>
           </Form>
         </div>
       );

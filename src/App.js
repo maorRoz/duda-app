@@ -11,7 +11,7 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { editing: false, comments: [] };
+    this.state = { editing: false, editCommentId: null, comments: [] };
   }
 
   addComment = async (name, text) => {
@@ -22,12 +22,30 @@ class App extends Component {
     this.setState({ comments: comments.concat(comment) });
   }
 
+  editComment = (commentIdToEdit, name, text) => {
+    const { comments } = this.state;
+    const updatedCommentList = comments.filter(comment => comment.id !== commentIdToEdit);
+    const comment = { id: commentIdToEdit, name, text };
+    updatedCommentList.push(comment);
+    this.setState({ comments: updatedCommentList });
+  };
+
+  focusEditComment = (commentIdToEdit) => {
+    this.setState({ editing: true, editCommentId: commentIdToEdit });
+  };
+
+  removeComment = (commentIdToRemove) => {
+    const { comments } = this.state;
+    this.setState({ comments : comments.filter(comment => comment.id !== commentIdToRemove) });
+  }
+
   render() {
-    const { editing, comments } = this.state;
+    const { editing, editCommentId, comments } = this.state;
     return (
       <div className='App'>
         <Header className='App-header' as='h1' color='blue'>User Reviews</Header>
-        <CommentsList comments={comments} />
+        <CommentsList comments={comments} focusEditComment={this.focusEditComment}
+          editCommentId={editCommentId} editComment={this.editComment} removeComment={this.removeComment} />
         {!editing && <CommentForm handleComment={this.addComment} />}
       </div>
     );
