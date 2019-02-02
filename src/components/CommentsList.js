@@ -7,7 +7,7 @@ import CommentForm from './CommentForm';
 const CommentItem = ({ comment, isEditing, setEditComment, editComment, removeComment }) => {
   const { id, name, text, avatarUrl } = comment;
   const setEdit = () => setEditComment(id);
-  const toEdit = () => editComment(id);
+  const toEdit = (newName, newText) => editComment(id, newName, newText);
   const toRemove = () => removeComment(id);
   return (
     <div>
@@ -33,11 +33,11 @@ const CommentItem = ({ comment, isEditing, setEditComment, editComment, removeCo
 
 class CommentList extends Component {
   render() {
-    const { comments, editCommentId, focusEditComment, removeComment } = this.props;
+    const { comments, editCommentId, editComment, focusEditComment, removeComment } = this.props;
     return (
       <div className='commentList'>
         {comments.map(comment => <CommentItem
-            key={comment.id} isEditing={editCommentId === comment.id} comment={comment}
+            key={comment.id} isEditing={editCommentId === comment.id} editComment={editComment} comment={comment}
             setEditComment={focusEditComment} removeComment={removeComment}/>)}
       </div>
     );

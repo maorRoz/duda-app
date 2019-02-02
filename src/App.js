@@ -11,7 +11,17 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { editing: false, editCommentId: null, comments: [] };
+    const comments = localStorage.getItem('comments');
+    this.state = { editing: false, editCommentId: null, comments: comments ? JSON.parse(comments) : [] };
+  }
+
+  componentDidUpdate(){
+    this.setLocalStorage();
+  }
+
+  setLocalStorage = () => {
+    const { comments } = this.state;
+    localStorage.setItem('comments', JSON.stringify(comments));
   }
 
   addComment = async (name, text) => {
@@ -24,10 +34,9 @@ class App extends Component {
 
   editComment = (commentIdToEdit, name, text) => {
     const { comments } = this.state;
-    const updatedCommentList = comments.filter(comment => comment.id !== commentIdToEdit);
-    const comment = { id: commentIdToEdit, name, text };
-    updatedCommentList.push(comment);
-    this.setState({ comments: updatedCommentList });
+    const updatedComments = comments.map(comment => comment.id === commentIdToEdit
+      ? { avatarUrl : comment.avatarUrl, id: commentIdToEdit, name, text } : comment);
+    this.setState({ editing: false, editCommentId: null, comments: updatedComments });
   };
 
   focusEditComment = (commentIdToEdit) => {
@@ -36,7 +45,7 @@ class App extends Component {
 
   removeComment = (commentIdToRemove) => {
     const { comments } = this.state;
-    this.setState({ comments : comments.filter(comment => comment.id !== commentIdToRemove) });
+    this.setState({ editing: false, comments : comments.filter(comment => comment.id !== commentIdToRemove) });
   }
 
   render() {
