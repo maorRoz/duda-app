@@ -1,0 +1,9 @@
+.commentList {
+    background-color: white;
+    width: 80%;
+    margin: 50px;
+}
+
+.commentActions {
+    float: right;
+}

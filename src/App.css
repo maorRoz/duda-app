@@ -1,3 +1,8 @@
 .App {
+  background-color: lightgray;
+  width: 640px;
+}
+
+.App-header {
   text-align: center;
 }

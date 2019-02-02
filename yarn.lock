@@ -870,6 +870,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@dudadev/random-img@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@dudadev/random-img/-/random-img-1.0.1.tgz#4ee5b7b73fefe70ea4f3e8fe724f7fad969318ee"
+  integrity sha512-kl1SrO3+bZ3mzGyqoWLopKC1qK6Q7PhZrrFpSN9hYBcUvd3YxUqUwh7L2xh4nEfSpkjFZV3ZRvaJYu8faI9GKg==
+
 "@emotion/is-prop-valid@^0.7.3":
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
